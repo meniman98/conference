@@ -6,19 +6,24 @@ import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.List;
 
-@Entity
+@Entity(name = "sessions")
 public class Session {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "session_id")
     private Long id;
     private String name;
     private LocalTime start;
     private LocalTime end;
 
-    @ManyToMany()
-    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "speakers",
+            joinColumns = @JoinColumn(name = "session_id"),
+            inverseJoinColumns = @JoinColumn(name = "speaker_id"))
     private List<Speaker> speakers;
+
     private int length;
     private String description;
 }
