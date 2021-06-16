@@ -1,6 +1,6 @@
 package com.jack.huncho.conference.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalTime;
@@ -11,11 +11,19 @@ public class Session {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "session_id")
+    @Nullable
     private Long id;
     private String name;
     private LocalTime start;
     private LocalTime end;
+    private long length;
+    private String description;
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(
+            name = "speakers",
+            joinColumns = @JoinColumn(name = "session_id", nullable = true),
+            inverseJoinColumns = @JoinColumn(name = "speaker_id"))
+    private List<Speaker> speakers;
 
     public Session() {
 
@@ -23,6 +31,15 @@ public class Session {
 
     public Session(String name) {
         this.name = name;
+    }
+
+    public Session(String name, LocalTime start, LocalTime end, List<Speaker> speakers, long length, String description) {
+        this.name = name;
+        this.start = start;
+        this.end = end;
+        this.speakers = speakers;
+        this.length = length;
+        this.description = description;
     }
 
     public Long getId() {
@@ -65,7 +82,7 @@ public class Session {
         this.speakers = speakers;
     }
 
-    public int getLength() {
+    public long getLength() {
         return length;
     }
 
@@ -81,13 +98,7 @@ public class Session {
         this.description = description;
     }
 
-    @ManyToMany
-    @JoinTable(
-            name = "speakers",
-            joinColumns = @JoinColumn(name = "session_id"),
-            inverseJoinColumns = @JoinColumn(name = "speaker_id"))
-    private List<Speaker> speakers;
 
-    private int length;
-    private String description;
+
+
 }

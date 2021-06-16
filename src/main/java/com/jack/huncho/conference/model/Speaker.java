@@ -1,6 +1,7 @@
 package com.jack.huncho.conference.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,14 +9,10 @@ import java.util.List;
 public class Speaker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "speaker_id")
     private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "name")
+    private String name;
 
     @ElementCollection
     private List<String> skills;
@@ -28,6 +25,24 @@ public class Speaker {
     private String company;
     private String bio;
 
+
+    public Speaker(String name) {
+        this.name = name;
+    }
+
+    public Speaker(String name, List<String> skills, List<Session> sessions, String title, String company, String bio) {
+        this.name = name;
+        this.skills = skills;
+        this.sessions = sessions;
+        this.title = title;
+        this.company = company;
+        this.bio = bio;
+    }
+
+    public Speaker() {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -36,21 +51,14 @@ public class Speaker {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public List<String> getSkills() {
         return skills;
