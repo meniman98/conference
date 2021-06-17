@@ -11,7 +11,6 @@ public class Session {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Nullable
     private Long id;
     private String name;
     private LocalTime start;
@@ -20,8 +19,8 @@ public class Session {
     private String description;
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(
-            name = "speakers",
-            joinColumns = @JoinColumn(name = "session_id", nullable = true),
+            name = "session_speakers",
+            joinColumns = @JoinColumn(name = "session_id"),
             inverseJoinColumns = @JoinColumn(name = "speaker_id"))
     private List<Speaker> speakers;
 

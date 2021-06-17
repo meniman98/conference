@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface SessionService {
     List<Session> getSessions();
+    Session getOneSession(long id);
+    Session createSession(Session session);
+    Session updateSession(long id, Session session);
+    void deleteSession(long id);
 }
