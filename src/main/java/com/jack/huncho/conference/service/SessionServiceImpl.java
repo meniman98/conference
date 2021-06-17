@@ -28,7 +28,7 @@ public class SessionServiceImpl implements SessionService {
             return optionalSession.get();
         else
             // TODO: make a dedicated Exception class
-            throw new RuntimeException("Application Not Found");
+            throw new RuntimeException("Session Not Found");
     }
 
     @Override
