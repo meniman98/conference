@@ -1,7 +1,6 @@
 package com.jack.huncho.conference.controller;
 
 import com.jack.huncho.conference.model.Speaker;
-import com.jack.huncho.conference.repository.SpeakerRepository;
 import com.jack.huncho.conference.service.SpeakerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
