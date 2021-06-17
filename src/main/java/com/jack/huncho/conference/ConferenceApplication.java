@@ -25,8 +25,8 @@ public class ConferenceApplication {
     private SpeakerRepository _speakerRepository;
 
     Speaker cactusJack = new Speaker("Cactus Jack");
-    Speaker huncoJack = new Speaker("Huncho Jack");
-    List<Speaker> speakers = Arrays.asList(cactusJack, huncoJack);
+    Speaker hunchoJack = new Speaker("Huncho Jack");
+    List<Speaker> speakers = Arrays.asList(cactusJack, hunchoJack);
     LocalTime start = LocalTime.of(6,0);
     LocalTime end = LocalTime.of(7,0);
     long length = Duration.between(start, end).toMinutes();
@@ -50,7 +50,7 @@ public class ConferenceApplication {
                     "Money Talk",
                     start,
                     end,
-                    Arrays.asList(huncoJack),
+                    speakers,
                     length,
                     "Learn how to speak money fluently"
             ));
