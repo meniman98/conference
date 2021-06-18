@@ -46,4 +46,9 @@ public class SessionServiceImpl implements SessionService {
     public void deleteSession(long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public boolean isPresent(long id) {
+       return repository.findById(id).isPresent();
+    }
 }

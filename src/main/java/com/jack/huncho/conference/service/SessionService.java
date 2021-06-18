@@ -10,4 +10,5 @@ public interface SessionService {
     Session createSession(Session session);
     Session updateSession(long id, Session session);
     void deleteSession(long id);
+    boolean isPresent(long id);
 }
