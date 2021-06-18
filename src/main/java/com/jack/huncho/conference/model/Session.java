@@ -1,7 +1,5 @@
 package com.jack.huncho.conference.model;
 
-import com.sun.istack.Nullable;
-
 import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.List;
@@ -17,7 +15,7 @@ public class Session {
     private LocalTime end;
     private long length;
     private String description;
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "session_speakers",
             joinColumns = @JoinColumn(name = "session_id"),
@@ -25,14 +23,18 @@ public class Session {
     private List<Speaker> speakers;
 
     public Session() {
-
     }
 
     public Session(String name) {
         this.name = name;
     }
 
-    public Session(String name, LocalTime start, LocalTime end, List<Speaker> speakers, long length, String description) {
+    public Session(String name,
+                   LocalTime start,
+                   LocalTime end,
+                   List<Speaker> speakers,
+                   long length,
+                   String description) {
         this.name = name;
         this.start = start;
         this.end = end;
@@ -96,8 +98,4 @@ public class Session {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
-
-
 }

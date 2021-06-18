@@ -13,15 +13,14 @@ public class SpeakerController {
 
     @GetMapping("/speaker/get")
     Iterable<Speaker> getAllSpeakers() {
-       return speakerService.getSpeakers();
+        return speakerService.getSpeakers();
     }
 
     @GetMapping("/speaker/get/{id}")
     Speaker getOneSpeaker(@PathVariable long id) {
-       return speakerService.getOneSpeaker(id);
+        return speakerService.getOneSpeaker(id);
     }
 
-    // TODO: put returns a 500
     @PutMapping("/speaker/put/{id}")
     Speaker updateSpeaker(@RequestBody Speaker speaker, @PathVariable long id) {
         return speakerService.updateSpeaker(id, speaker);
@@ -32,7 +31,6 @@ public class SpeakerController {
         return speakerService.createSpeaker(speaker);
     }
 
-    // TODO: delete returns a 500
     @DeleteMapping("/speaker/delete/{id}")
     void deleteSpeaker(@PathVariable long id) {
         speakerService.deleteSpeaker(id);

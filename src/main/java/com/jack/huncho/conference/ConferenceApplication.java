@@ -11,7 +11,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -21,8 +20,6 @@ import java.util.List;
 public class ConferenceApplication {
 
     private static final Logger log = LoggerFactory.getLogger(ConferenceApplication.class);
-    @Autowired
-    private SpeakerRepository _speakerRepository;
 
     Speaker cactusJack = new Speaker("Cactus Jack");
     Speaker hunchoJack = new Speaker("Huncho Jack");
@@ -32,7 +29,6 @@ public class ConferenceApplication {
     long length = Duration.between(start, end).toMinutes();
 
     public static void main(String[] args) {
-
         SpringApplication.run(ConferenceApplication.class, args);
     }
 
@@ -41,9 +37,7 @@ public class ConferenceApplication {
     public CommandLineRunner demo(SessionRepository repository) {
 
         return (args) -> {
-
             repository.save(new Session("Huncho Jack"));
-
             repository.save(new Session("Jack Huncho"));
             repository.save(new Session("YSL"));
             repository.save(new Session(

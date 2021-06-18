@@ -16,15 +16,14 @@ public class SessionServiceImpl implements SessionService {
     private SessionRepository repository;
 
     @Override
-    public List<Session> getSessions(){
+    public List<Session> getSessions() {
         return (List<Session>) repository.findAll();
     }
 
     @Override
     public Session getOneSession(long id) {
         Optional<Session> optionalSession = repository.findById(id);
-
-        if(optionalSession.isPresent())
+        if (optionalSession.isPresent())
             return optionalSession.get();
         else
             // TODO: make a dedicated Exception class

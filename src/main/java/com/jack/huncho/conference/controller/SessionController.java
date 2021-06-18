@@ -26,7 +26,7 @@ public class SessionController {
         return sessionService.createSession(session);
     }
 
-    // TODO: put works but {"id":5,} is required which might not be ideal
+
     @PutMapping("/session/put/{id}")
     Session updateSession(@RequestBody Session session, @PathVariable long id) {
         return sessionService.updateSession(id, session);

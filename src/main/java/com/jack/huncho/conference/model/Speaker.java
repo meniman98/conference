@@ -1,7 +1,6 @@
 package com.jack.huncho.conference.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -25,12 +24,16 @@ public class Speaker {
     private String company;
     private String bio;
 
-
     public Speaker(String name) {
         this.name = name;
     }
 
-    public Speaker(String name, List<String> skills, List<Session> sessions, String title, String company, String bio) {
+    public Speaker(String name,
+                   List<String> skills,
+                   List<Session> sessions,
+                   String title,
+                   String company,
+                   String bio) {
         this.name = name;
         this.skills = skills;
         this.sessions = sessions;
@@ -39,9 +42,7 @@ public class Speaker {
         this.bio = bio;
     }
 
-    public Speaker() {
-
-    }
+    public Speaker() { }
 
     public Long getId() {
         return id;
@@ -58,7 +59,6 @@ public class Speaker {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public List<String> getSkills() {
         return skills;
