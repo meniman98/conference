@@ -1,6 +1,9 @@
 package com.jack.huncho.conference.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -10,6 +13,7 @@ public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String name;
     private LocalTime start;
     private LocalTime end;
