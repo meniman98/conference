@@ -25,7 +25,6 @@ public class SpeakerServiceImpl implements SpeakerService {
         if(optionalSpeaker.isPresent())
             return optionalSpeaker.get();
         else
-            // TODO: make a dedicated Exception class
             throw new RuntimeException("Speaker Not Found");
     }
 

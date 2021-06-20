@@ -6,13 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import com.jack.huncho.conference.exception.FieldErrorMessage;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
-import javax.xml.bind.ValidationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,13 +27,17 @@ public class SessionController {
     }
 
     @GetMapping("/session/get/{id}")
-    Session getOneSession(@PathVariable long id) {
-        return sessionService.getOneSession(id);
+    Session getOneSession(@PathVariable long id) throws EntityNotFoundException {
+        if (sessionService.isPresent(id)) {
+            return sessionService.getOneSession(id);
+        } else {
+            throw new EntityNotFoundException();
+        }
     }
 
     @PostMapping("/session/post")
     Session createSessions(@Valid @RequestBody Session session) {
-            return sessionService.createSession(session);
+        return sessionService.createSession(session);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -48,17 +51,22 @@ public class SessionController {
     }
 
     @PutMapping("/session/put/{id}")
-    ResponseEntity<Session> updateSession(@RequestBody Session session, @PathVariable long id) {
+    ResponseEntity<Session> updateSession(@Valid @RequestBody Session session,
+                                          @PathVariable long id) throws EntityNotFoundException {
         if (sessionService.isPresent(id) && (id == session.getId())) {
             return new ResponseEntity(sessionService.updateSession(id, session), HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity(session, HttpStatus.BAD_REQUEST);
+        } else {
+            throw new EntityNotFoundException();
         }
     }
 
     @DeleteMapping("/session/delete/{id}")
-    void deleteSession(@PathVariable long id) {
-        sessionService.deleteSession(id);
+    void deleteSession(@PathVariable long id) throws EntityNotFoundException {
+        if (sessionService.isPresent(id)) {
+            sessionService.deleteSession(id);
+        }
+        else {
+            throw new EntityNotFoundException();
+        }
     }
 }

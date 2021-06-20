@@ -17,7 +17,7 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public List<Session> getSessions() {
-        return (List<Session>) repository.findAll();
+        return repository.findAll();
     }
 
     @Override
@@ -26,7 +26,6 @@ public class SessionServiceImpl implements SessionService {
         if (optionalSession.isPresent())
             return optionalSession.get();
         else
-            // TODO: make a dedicated Exception class
             throw new RuntimeException("Session Not Found");
     }
 
@@ -49,6 +48,6 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public boolean isPresent(long id) {
-       return repository.findById(id).isPresent();
+        return repository.findById(id).isPresent();
     }
 }
