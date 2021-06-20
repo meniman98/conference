@@ -1,5 +1,6 @@
 package com.jack.huncho.conference.controller;
 
+import com.jack.huncho.conference.Constants;
 import com.jack.huncho.conference.exception.FieldErrorMessage;
 import com.jack.huncho.conference.model.Session;
 import com.jack.huncho.conference.model.Speaker;
@@ -23,12 +24,12 @@ public class SpeakerController {
     SpeakerServiceImpl speakerService;
 
     // TODO: make an exception when an empty list is returned
-    @GetMapping("/speaker/get")
+    @GetMapping(Constants.SPEAKER_GET)
     Iterable<Speaker> getAllSpeakers() {
         return speakerService.getSpeakers();
     }
 
-    @GetMapping("/speaker/get/{id}")
+    @GetMapping(Constants.SPEAKER_GET_ONE)
     Speaker getOneSpeaker(@PathVariable long id) throws EntityNotFoundException {
         if (speakerService.isPresent(id)) {
             return speakerService.getOneSpeaker(id);
@@ -37,7 +38,7 @@ public class SpeakerController {
         }
     }
 
-    @PutMapping("/speaker/put/{id}")
+    @PutMapping(Constants.SPEAKER_PUT)
     ResponseEntity<Speaker> updateSpeaker(@Valid @RequestBody Speaker speaker,
                                           @PathVariable long id) throws EntityNotFoundException {
         if (speakerService.isPresent(id) && (id == speaker.getId())) {
@@ -47,7 +48,7 @@ public class SpeakerController {
         }
     }
 
-    @PostMapping("/speaker/post")
+    @PostMapping(Constants.SPEAKER_POST)
     Speaker createSpeaker(@Valid @RequestBody Speaker speaker) {
         return speakerService.createSpeaker(speaker);
     }
@@ -63,7 +64,7 @@ public class SpeakerController {
     }
 
     // TODO: make an exception if the user attempts to delete a speaker within a session
-    @DeleteMapping("/speaker/delete/{id}")
+    @DeleteMapping(Constants.SPEAKER_DELETE)
     void deleteSpeaker(@PathVariable long id) throws EntityNotFoundException {
         if (speakerService.isPresent(id)) {
             speakerService.deleteSpeaker(id);

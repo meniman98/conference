@@ -1,5 +1,6 @@
 package com.jack.huncho.conference.controller;
 
+import com.jack.huncho.conference.Constants;
 import com.jack.huncho.conference.model.Session;
 import com.jack.huncho.conference.service.SessionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,12 @@ public class SessionController {
     @Autowired
     SessionServiceImpl sessionService;
 
-    @GetMapping("/session/get")
+    @GetMapping(Constants.SESSION_GET)
     Iterable<Session> getAllSessions() {
         return sessionService.getSessions();
     }
 
-    @GetMapping("/session/get/{id}")
+    @GetMapping(Constants.SESSION_GET_ONE)
     Session getOneSession(@PathVariable long id) throws EntityNotFoundException {
         if (sessionService.isPresent(id)) {
             return sessionService.getOneSession(id);
@@ -35,7 +36,7 @@ public class SessionController {
         }
     }
 
-    @PostMapping("/session/post")
+    @PostMapping(Constants.SESSION_POST)
     Session createSessions(@Valid @RequestBody Session session) {
         return sessionService.createSession(session);
     }
@@ -50,7 +51,7 @@ public class SessionController {
         return fieldErrorMessages;
     }
 
-    @PutMapping("/session/put/{id}")
+    @PutMapping(Constants.SESSION_PUT)
     ResponseEntity<Session> updateSession(@Valid @RequestBody Session session,
                                           @PathVariable long id) throws EntityNotFoundException {
         if (sessionService.isPresent(id) && (id == session.getId())) {
@@ -60,7 +61,7 @@ public class SessionController {
         }
     }
 
-    @DeleteMapping("/session/delete/{id}")
+    @DeleteMapping(Constants.SESSION_DELETE)
     void deleteSession(@PathVariable long id) throws EntityNotFoundException {
         if (sessionService.isPresent(id)) {
             sessionService.deleteSession(id);

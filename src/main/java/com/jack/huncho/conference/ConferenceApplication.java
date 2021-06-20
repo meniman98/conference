@@ -23,6 +23,7 @@ public class ConferenceApplication {
 
     Speaker cactusJack = new Speaker("Cactus Jack");
     Speaker hunchoJack = new Speaker("Huncho Jack");
+    Speaker quavoHuncho = new Speaker("Quavo Huncho");
     List<Speaker> speakers = Arrays.asList(cactusJack, hunchoJack);
     LocalTime start = LocalTime.of(6,0);
     LocalTime end = LocalTime.of(7,0);
@@ -34,7 +35,7 @@ public class ConferenceApplication {
 
 
     @Bean
-    public CommandLineRunner demo(SessionRepository repository) {
+    public CommandLineRunner demo(SessionRepository repository, SpeakerRepository speakerRepository) {
 
         return (args) -> {
             repository.save(new Session("Huncho Jack"));
@@ -48,6 +49,7 @@ public class ConferenceApplication {
                     length,
                     "Learn how to speak money fluently"
             ));
+            speakerRepository.save(quavoHuncho);
 
             for (Session session : repository.findAll()) {
                 log.info("Session held by: " + session.getName());
