@@ -44,4 +44,9 @@ public class SpeakerServiceImpl implements SpeakerService {
     public void deleteSpeaker(long id) {
         speakerRepository.deleteById(id);
     }
+
+    @Override
+    public boolean isPresent(long id) {
+        return (speakerRepository.findById(id).isPresent());
+    }
 }

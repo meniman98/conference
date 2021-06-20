@@ -2,6 +2,7 @@ package com.jack.huncho.conference.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity(name = "speakers")
@@ -11,6 +12,7 @@ public class Speaker {
     private Long id;
 
     @Column(name = "name")
+    @NotBlank
     private String name;
 
     @ElementCollection

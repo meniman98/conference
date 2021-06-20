@@ -10,4 +10,5 @@ public interface SpeakerService {
     Speaker updateSpeaker(long id, Speaker speaker);
     Speaker createSpeaker(Speaker speaker);
     void deleteSpeaker(long id);
+    boolean isPresent(long id);
 }
