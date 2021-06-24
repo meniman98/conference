@@ -27,8 +27,6 @@ public class ConferenceApplication {
     Speaker cactusJack = new Speaker("Cactus Jack");
     Speaker hunchoJack = new Speaker("Huncho Jack");
     Speaker quavoHuncho = new Speaker("Quavo Huncho");
-    Review review2 = new Review("Very enjoyable",
-            "Cactus Jack", 5, "Speaker");
     List<Speaker> speakers = Arrays.asList(cactusJack, hunchoJack);
     LocalTime start = LocalTime.of(6,0);
     LocalTime end = LocalTime.of(7,0);
@@ -51,12 +49,12 @@ public class ConferenceApplication {
                                   RestTemplate restTemplate) {
 
         return (args) -> {
-            Review review = restTemplate.getForObject("http://localhost:8081/review/get/1",
+            Review review = restTemplate.getForObject(
+                    "http://localhost:8081/review/get/1",
                     Review.class);
-            Review review2 = restTemplate.getForObject("http://localhost:8081/review/get/2",
+            Review review2 = restTemplate.getForObject(
+                    "http://localhost:8081/review/get/2",
                     Review.class);
-            hunchoJack.setReviews(review);
-            hunchoJack.setReviews(review2);
             repository.save(new Session("Huncho Jack"));
             repository.save(new Session("Jack Huncho"));
             repository.save(new Session("YSL"));
@@ -69,6 +67,10 @@ public class ConferenceApplication {
                     "Learn how to speak money fluently"
             ));
             speakerRepository.save(quavoHuncho);
+            speakerRepository.save(new Speaker("Durkio",
+                    Arrays.asList("Java", "Kotlin"),
+                    Arrays.asList(review, review2)));
+
 
             for (Session session : repository.findAll()) {
                 log.info("Session held by: " + session.getName());

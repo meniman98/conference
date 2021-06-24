@@ -1,7 +1,6 @@
 package com.jack.huncho.conference.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -26,7 +25,7 @@ public class Speaker {
     private List<Session> sessions;
 
 
-    @OneToMany(cascade=CascadeType.PERSIST)
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Review> reviews = new ArrayList<Review>();
 
     private String title;
@@ -35,6 +34,12 @@ public class Speaker {
 
     public Speaker(String name) {
         this.name = name;
+    }
+
+    public Speaker(String name, List<String> skills, List<Review> reviews) {
+        this.name = name;
+        this.skills = skills;
+        this.reviews = reviews;
     }
 
     public Speaker(String name,

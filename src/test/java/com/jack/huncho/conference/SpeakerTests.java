@@ -46,6 +46,13 @@ public class SpeakerTests {
                 .andExpect(jsonPath("$", hasSize(2)));
     }
 
+    @Test
+    void speakerHasReviews() throws Exception {
+        this.mvc.perform(get("/speaker/get/2"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$.reviews", hasSize(2)));
+    }
+
     // check if get request works and that we get back the desired object
     // by checking that the name is Cactus Jack
     @Test
