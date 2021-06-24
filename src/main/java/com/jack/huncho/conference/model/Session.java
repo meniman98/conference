@@ -1,10 +1,7 @@
 package com.jack.huncho.conference.model;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalTime;
 import java.util.List;

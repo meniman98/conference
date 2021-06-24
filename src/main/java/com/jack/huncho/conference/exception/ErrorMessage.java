@@ -1,7 +1,5 @@
 package com.jack.huncho.conference.exception;
 
-import org.springframework.http.HttpStatus;
-
 public class ErrorMessage {
     private String message;
     private String status;

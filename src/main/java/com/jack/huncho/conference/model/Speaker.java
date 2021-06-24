@@ -1,8 +1,11 @@
 package com.jack.huncho.conference.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "speakers")
@@ -21,6 +24,10 @@ public class Speaker {
     @ManyToMany(mappedBy = "speakers")
     @JsonIgnore
     private List<Session> sessions;
+
+
+    @OneToMany(cascade=CascadeType.PERSIST)
+    private List<Review> reviews = new ArrayList<Review>();
 
     private String title;
     private String company;
@@ -105,5 +112,13 @@ public class Speaker {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Review review) {
+        this.reviews.add(review);
     }
 }

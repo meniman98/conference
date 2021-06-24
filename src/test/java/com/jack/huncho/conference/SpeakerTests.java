@@ -64,7 +64,7 @@ public class SpeakerTests {
 
     // overloaded function
     @Test
-    void failingGetOneRequest(int id) throws Exception {
+    void failingGetOneRequest(long id) throws Exception {
         if (id == 0) {
             id = 1789;
         }

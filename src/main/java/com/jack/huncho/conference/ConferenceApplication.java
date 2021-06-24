@@ -1,16 +1,19 @@
 package com.jack.huncho.conference;
 
+import com.jack.huncho.conference.model.Review;
 import com.jack.huncho.conference.model.Session;
 import com.jack.huncho.conference.model.Speaker;
 import com.jack.huncho.conference.repository.SessionRepository;
 import com.jack.huncho.conference.repository.SpeakerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
+
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -24,6 +27,8 @@ public class ConferenceApplication {
     Speaker cactusJack = new Speaker("Cactus Jack");
     Speaker hunchoJack = new Speaker("Huncho Jack");
     Speaker quavoHuncho = new Speaker("Quavo Huncho");
+    Review review2 = new Review("Very enjoyable",
+            "Cactus Jack", 5, "Speaker");
     List<Speaker> speakers = Arrays.asList(cactusJack, hunchoJack);
     LocalTime start = LocalTime.of(6,0);
     LocalTime end = LocalTime.of(7,0);
@@ -33,11 +38,25 @@ public class ConferenceApplication {
         SpringApplication.run(ConferenceApplication.class, args);
     }
 
+    // the restTemplate
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
+    }
+
 
     @Bean
-    public CommandLineRunner demo(SessionRepository repository, SpeakerRepository speakerRepository) {
+    public CommandLineRunner demo(SessionRepository repository,
+                                  SpeakerRepository speakerRepository,
+                                  RestTemplate restTemplate) {
 
         return (args) -> {
+            Review review = restTemplate.getForObject("http://localhost:8081/review/get/1",
+                    Review.class);
+            Review review2 = restTemplate.getForObject("http://localhost:8081/review/get/2",
+                    Review.class);
+            hunchoJack.setReviews(review);
+            hunchoJack.setReviews(review2);
             repository.save(new Session("Huncho Jack"));
             repository.save(new Session("Jack Huncho"));
             repository.save(new Session("YSL"));
