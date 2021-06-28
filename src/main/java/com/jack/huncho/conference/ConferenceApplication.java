@@ -49,12 +49,12 @@ public class ConferenceApplication {
                                   RestTemplate restTemplate) {
 
         return (args) -> {
-            Review review = restTemplate.getForObject(
-                    "http://localhost:8081/review/get/1",
-                    Review.class);
-            Review review2 = restTemplate.getForObject(
-                    "http://localhost:8081/review/get/2",
-                    Review.class);
+//            Review review = restTemplate.getForObject(
+//                    "http://localhost:8081/review/get/1",
+//                    Review.class);
+//            Review review2 = restTemplate.getForObject(
+//                    "http://localhost:8081/review/get/2",
+//                    Review.class);
             repository.save(new Session("Huncho Jack"));
             repository.save(new Session("Jack Huncho"));
             repository.save(new Session("YSL"));
@@ -67,9 +67,6 @@ public class ConferenceApplication {
                     "Learn how to speak money fluently"
             ));
             speakerRepository.save(quavoHuncho);
-            speakerRepository.save(new Speaker("Durkio",
-                    Arrays.asList("Java", "Kotlin"),
-                    Arrays.asList(review, review2)));
 
 
             for (Session session : repository.findAll()) {
