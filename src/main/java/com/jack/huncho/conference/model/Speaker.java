@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "speakers")
@@ -26,7 +25,7 @@ public class Speaker {
 
 
     @OneToMany(cascade=CascadeType.ALL)
-    private List<Review> reviews = new ArrayList<Review>();
+    private List<Review> reviews;
 
     private String title;
     private String company;
@@ -42,19 +41,15 @@ public class Speaker {
         this.reviews = reviews;
     }
 
-    public Speaker(String name,
-                   List<String> skills,
-                   List<Session> sessions,
-                   String title,
-                   String company,
-                   String bio) {
+    public Speaker(String name, List<String> skills, String title, String company, String bio) {
         this.name = name;
         this.skills = skills;
-        this.sessions = sessions;
         this.title = title;
         this.company = company;
         this.bio = bio;
     }
+
+
 
     public Speaker() { }
 

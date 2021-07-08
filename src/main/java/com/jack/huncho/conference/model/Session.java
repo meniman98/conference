@@ -1,8 +1,11 @@
 package com.jack.huncho.conference.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -14,8 +17,7 @@ public class Session {
     private Long id;
     @NotBlank
     private String name;
-    private LocalTime start;
-    private LocalTime end;
+    private LocalDateTime start;
     @Max(1440)
     private long length;
     private String description;
@@ -35,14 +37,12 @@ public class Session {
     }
 
     public Session(String name,
-                   LocalTime start,
-                   LocalTime end,
+                   LocalDateTime start,
                    List<Speaker> speakers,
                    long length,
                    String description) {
         this.name = name;
         this.start = start;
-        this.end = end;
         this.speakers = speakers;
         this.length = length;
         this.description = description;
@@ -64,20 +64,12 @@ public class Session {
         this.name = name;
     }
 
-    public LocalTime getStart() {
+    public LocalDateTime getStart() {
         return start;
     }
 
-    public void setStart(LocalTime start) {
+    public void setStart(LocalDateTime start) {
         this.start = start;
-    }
-
-    public LocalTime getEnd() {
-        return end;
-    }
-
-    public void setEnd(LocalTime end) {
-        this.end = end;
     }
 
     public List<Speaker> getSpeakers() {
