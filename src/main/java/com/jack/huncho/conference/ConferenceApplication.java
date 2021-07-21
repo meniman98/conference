@@ -3,7 +3,6 @@ package com.jack.huncho.conference;
 import com.jack.huncho.conference.model.Session;
 import com.jack.huncho.conference.model.Speaker;
 import com.jack.huncho.conference.repository.SessionRepository;
-import com.jack.huncho.conference.repository.SpeakerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -17,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -82,9 +80,7 @@ public class ConferenceApplication {
 
 
     @Bean
-    public CommandLineRunner demo(SessionRepository repository,
-                                  SpeakerRepository speakerRepository,
-                                  RestTemplate restTemplate) {
+    public CommandLineRunner demo(SessionRepository repository) {
 
         return (args) -> {
             // sessions

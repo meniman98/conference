@@ -32,8 +32,9 @@ public class Session {
     public Session() {
     }
 
-    public Session(String name) {
+    public Session(String name, String description) {
         this.name = name;
+        this.description = description;
     }
 
     public Session(String name,
